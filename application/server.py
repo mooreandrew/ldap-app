@@ -26,5 +26,4 @@ def index(username, password):
 
     # Check if the credentials are correct
     response = ldap_manager.authenticate(username,password)
-    print(response.status)
-    return 'OK'
+    return str(response.status)
