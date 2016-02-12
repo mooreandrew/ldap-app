@@ -27,3 +27,16 @@ def index(username, password):
     # Check if the credentials are correct
     response = ldap_manager.authenticate(username,password)
     return str(response.status)
+
+
+@app.route('/simple/<username>/<password>')
+def simple(username, password):
+
+    config = dict()
+
+    config['LDAP_HOST'] = os.environ.get('LDAP_HOST')
+    ldap_manager = LDAP3LoginManager()
+    ldap_manager.init_config(config)
+
+    response = ldap_manager.authenticate_direct_credentials(username,password)
+    return str(response.status)
